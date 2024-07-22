@@ -58,18 +58,40 @@
                         class="fas fa-angle-double-up"></i></button>
             </div>
         </div>
-        <div>
-            <h4>{{$data["Title"]}}</h4>
-        </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-3">
+                <div class="">
+                    @foreach ($Categories as $Categories)
+                    @if ($Categories['Code'] == $activeCategory)
+                    <div class="">
+                        <div class="contentData contentActive">
+                            <p>{{$Categories['Title']}}</p>
+                        </div>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                    </div>
+                    @else
+                    <div class="">
+                        <a href="/singleDownload/{{$Categories['Code']}}/{{$Categories['Category']}}/">
+                            <div class="contentData">
+                                <p>{{$Categories['Title']}}</p>
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                    </div>
+
+                    @endif
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-md-7">
                 <div class="contentCard">
                     <h5>Content</h5>
                     <hr>
                     <p>{!!$data["Content"]!!}</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="contentCard">
                     <h5>Downloadable Templates</h5>
                     <hr>

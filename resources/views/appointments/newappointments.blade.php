@@ -13,16 +13,62 @@
         <div class="content-title mt-3">
             <h3> New Appointments </h3>
         </div>
-        <ol class="breadcrumb d-flex justify-content-end">
-            <li class="breadcrumb-item"><a href="/alldownloads/" class="breadcrumbs text-danger"><i
-                        class="fa fa-home"></i>
-                    Home</a>
+        <ol class="breadcrumb d-flex justify-content-end breadcrumb-box">
+            <li class="breadcrumb-item">
+                <a href="/alldownloads/" class="breadcrumbs text-danger">
+                    <i class="fa fa-home"></i> Home
+                </a>
             </li>
-            <li class="breadcrumb-item "><span class="breadcrumbs text-muted">
-                    New Appointments
-                </span>
+            <li class="breadcrumb-item dropdown" id="breadcrumbDropdown">
+                <a href="#" class="breadcrumbs text-muted dropdown-toggle" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fas fa-calendar-plus"></i> New Appointments
+                </a>
+                <div class="dropdown-menu" aria-labelledby="breadcrumbDropdown">
+                    <a class="dropdown-item" href="/Rescheduledappointments"><i class="fas fa-sync-alt"></i>
+                        Rescheduled
+                        Appointment</a>
+                    <a class="dropdown-item" href="/newservice/"><i class="fas fa-briefcase"></i> New
+                        Service</a>
+                    <a class="dropdown-item" href="/myservices/"><i class="fas fa-briefcase"></i> My
+                        Services</a>
+
+                    <a class="dropdown-item" href="/allappointments"><i class="fas fa-calendar"></i>
+                        All
+                        Appointments</a>
+                    <a class="dropdown-item" href="/alltrainings/"><i class="fas fa-list"></i>
+                        All
+                        Trainings</a>
+                    <a class="dropdown-item" href="/mytrainings/"><i class="fas fa-graduation-cap"></i>
+                        My
+                        Trainings</a>
+                    <a class="dropdown-item" href="/upcomingevents/"><i class="fas fa-calendar-alt"></i>
+                        All Events</a>
+                    <a class="dropdown-item" href="/myevents/"><i class="fas fa-file-invoice"></i>
+                        My Events</a>
+                    <a class="dropdown-item" href="/quotations"><i class="fas fa-clipboard-list"></i>
+                        Quotations</a>
+                    <a class="dropdown-item" href="/financials"><i class="fas fa-user"></i>
+                        Invoices</a>
+                    <a class="dropdown-item" href="/receipts"><i class="fas fa-receipt"></i>
+                        Receipts</a>
+                    <a class="dropdown-item" href="/getStatement/{{session('member_no')}}"><i
+                            class="fas fa-money-check"></i>
+                        Statement</a>
+                    <a class="dropdown-item" href="/users"><i class="fas fa-users"></i>
+                        Users</a>
+                    <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </div>
             </li>
         </ol>
+
+    </div>
+    <!-- end col -->
+</div>
+<div class="row">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
                 <form method="" action="{{ action('AppointmentsController@createAppointment') }}">
@@ -87,7 +133,6 @@
             </div>
         </div>
     </div>
-    <!-- end col -->
 </div>
 <!-- end row -->
 </form>

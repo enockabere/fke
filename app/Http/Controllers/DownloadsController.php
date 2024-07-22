@@ -164,8 +164,8 @@ class DownloadsController extends Controller
     public function searchResults($ext)
     {
         $searchQuery = $ext;
-        $filter = "(contains(Body, '$searchQuery'))";
-        $filtered = filterData('QyDocumentCategoryLine',$filter);
+        $filter = "(contains(Title, '$searchQuery'))";
+        $filtered = filterData('QyNewPortalDocuments',$filter);
         if($filtered != null)
             {
                 $documents = $filtered['value'];
@@ -180,25 +180,35 @@ class DownloadsController extends Controller
         $searchQuery = $request->searchQuery;
         return redirect("/results/$searchQuery");
     }
-    public function singleDownload($id,$type)
+    public function singleDownload($id, $type)
     {
         $data = getfilteredNavData('QyNewPortalDocuments', 'Code', $id)['value'][0];
+        $Categories =getNavData('QyNewPortalDocuments')['value'];
+
+        $filteredCategories = array_filter($Categories, function ($category) use ($type) {
+            return isset($category['Category']) && $category['Category'] == $type;
+        });
+
         $data["ExternalLinks"] = "";
         $data["Templates"] = "";
         $blobText = $this->GetDocContent($id);
-        $blobTexts = explode("## ",$blobText);
+        $blobTexts = explode("## ", $blobText);
         $data["Content"] = $blobTexts[0];
-        if(count($blobTexts) > 1){
+        if (count($blobTexts) > 1) {
             $data["ExternalLinks"] = $blobTexts[1];
         }
-        if(count($blobTexts) > 2){
+        if (count($blobTexts) > 2) {
             $data["Templates"] = $blobTexts[2];
         }
-        //attachments
-        //$data['attachments'] = filterData('QyAttachments',"No eq '$id' and Table_ID eq 50157 and ((File_Extension eq 'pdf' or File_Extension eq 'xlsx' or File_Extension eq 'csv' or File_Extension eq 'docx'))");
-        $data['attachments'] = filterData('QyAttachments',"No eq '$id' and Table_ID eq 50157 and (File_Type eq 'Image' or File_Type eq 'Word' or File_Type eq 'PDF' or File_Type eq 'Excel' or File_Type eq 'PowerPoint')")['value'];
-        return view('/downloads/singleDownload')->with('data', $data);
+        // attachments
+        // $data['attachments'] = filterData('QyAttachments', "No eq '$id' and Table_ID eq 50157 and ((File_Extension eq 'pdf' or File_Extension eq 'xlsx' or File_Extension eq 'csv' or File_Extension eq 'docx'))");
+        $data['attachments'] = filterData('QyAttachments', "No eq '$id' and Table_ID eq 50157 and (File_Type eq 'Image' or File_Type eq 'Word' or File_Type eq 'PDF' or File_Type eq 'Excel' or File_Type eq 'PowerPoint')")['value'];
+        return view('/downloads/singleDownload')
+        ->with('data', $data)
+        ->with('Categories', $filteredCategories)
+        ->with('activeCategory', $id);
     }
+
     function GetDocContent($code){
         try {
             $service = new NTLMSoapClient(config('app.webService'));

@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <title>Federation of Kenya Employers</title>
+    <link rel="shortcut icon" href="{{ URL::asset('images/favicon.png')}}">
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&family=Noto+Sans+Javanese&display=swap');

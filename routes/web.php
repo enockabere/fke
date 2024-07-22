@@ -31,6 +31,7 @@ Route::get('/home', 'GeneralController@index')->name('home');
 Route::get('/dashboard', 'GeneralController@dashboard');
 Route::get('/requestservice', 'GeneralController@RequestService');
 Route::post('/resetPassword', 'GeneralController@resetPassword');
+Route::post('/forgotPassword', 'GeneralController@forgotPassword');
 Route::get('/verify', 'GeneralController@verify');
 Route::post('/newPassword', 'GeneralController@newPassword');
 //General Routes

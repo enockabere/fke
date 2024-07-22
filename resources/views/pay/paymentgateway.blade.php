@@ -24,7 +24,135 @@
     </div>
 </div>
 <div class="row" id="holder">
-    <div class="col-md-5">
+    <div class="col-md-3 my-1">
+        <div class="menu-card">
+            <div class="contentCard">
+                <h3>Member Services</h3>
+            </div>
+            <div class="memberservices my-2 drops1">
+                <h4>Request for services online</h4>
+                <div class='menu-drops menu1'>
+                    <p><a href="/newservice/" class="small-ident"><i class="las la-hand-point-right"></i> New
+                            Request</a></p>
+                    <p><a href="/myservices/" class="small-ident"><i class="las la-hand-point-right"></i> My
+                            Services </a>
+                    </p>
+                </div>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+            <div class="memberservices my-2 drops2">
+                <h4 class="">Book appointment online </h4>
+                <div class='menu-drops menu2'>
+                    <p><a href="/newappointments" class="small-ident"><i class="las la-hand-point-right"></i>
+                            New Appointment
+                        </a>
+                    </p>
+                    <p><a href="/Rescheduledappointments" class="small-ident"><i class="las la-hand-point-right"></i>
+                            Rescheduled
+                            Appointment </a></p>
+                    <p><a href="/allappointments" class="small-ident"><i class="las la-hand-point-right"></i> All
+                            Appointments
+                        </a>
+                    </p>
+                </div>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+            <div class="memberservices my-2 drops3">
+                <h4>Trainings</h4>
+                <div class='menu-drops menu3'>
+                    <p><a href="/alltrainings/" class="small-ident"><i class="las la-hand-point-right"></i> All
+                            Trainings </a>
+                    </p>
+                    <p><a href="/mytrainings/" class="small-ident"><i class="las la-hand-point-right"></i> My
+                            Trainings </a>
+                    </p>
+                </div>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+            <div class="memberservices my-2 drops4">
+                <h4>Events</h4>
+                <div class='menu-drops menu4'>
+                    <p><a href="/upcomingevents/" class="small-ident"><i class="las la-hand-point-right"></i>
+                            All Events </a>
+                    </p>
+                    <p><a href="/myevents/" class="small-ident"><i class="las la-hand-point-right"></i> My
+                            Events </a>
+                    </p>
+                </div>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+            <!-- <div class="memberservices my-2">
+                        <p><a href="/cases" class="solo-menu"> Case
+                                Management
+                            </a>
+                        </p>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                    </div> -->
+            <div class="memberservices my-2 drops5">
+                <h4>Financials</h4>
+                <div class='menu-drops menu5'>
+                    <p><a href="/quotations" class="small-ident"><i class="las la-hand-point-right"></i>
+                            Quotations</a>
+                    </p>
+                    <p><a href="/financials" class="small-ident"><i class="las la-hand-point-right"></i>
+                            Invoices </a>
+                    </p>
+                    <p><a href="/receipts" class="small-ident"><i class="las la-hand-point-right"></i> Receipts
+                        </a>
+                    </p>
+                    <p><a href="/getStatement/{{session('member_no')}}" target="_blank" class="small-ident"><i
+                                class="las la-hand-point-right"></i> Statement </a>
+                    </p>
+
+                </div>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+            <div class="memberservices my-2 drops6">
+                <h4>User
+                    Management</h4>
+                <div class='menu-drops menu6'>
+                    <p><a href="/users" class="small-ident"><i class="las la-hand-point-right"></i>
+                            Users</a>
+                    </p>
+                    @if ($user['membertype'] == 'ASSOCIATION')
+                    <p><a href="/associatedcompanies" class="small-ident"><i class="las la-hand-point-right"></i>
+                            Associated Companies </a>
+                    </p>
+                    @endif
+                </div>
+            </div>
+            <div class="memberservices my-2">
+                <p><a href="/users" class="solo-menu">
+                    </a>
+                </p>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+            @if(session('isDocumentsAdmin') != null && session('isDocumentsAdmin') == true)
+            <div class="memberservices my-2">
+                <p><a href="/documents-admin" class="solo-menu">
+                        Documents Admin </a>
+                </p>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+            @endif
+            <div class="memberservices my-2">
+                <p><a href="/contact" class="solo-menu"><i
+                            class="bx bx-mail-send font-size-16 align-middle mr-1 text-danger"></i>
+                        Contact </a>
+                </p>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+
+            <div class="memberservices my-2">
+                <p><a href="/logout" class="solo-menu"><i
+                            class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>
+                        Logout </a>
+                </p>
+                <hr style="margin-top: -10px;border-top: 1px dotted red;">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 my-1">
         <div class="summarycard">
             <h4 class="summarytitle">Total Pay</h4>
             <h2 class="summarycost">Ksh. {{$Total_Payable ? number_format($Total_Payable, 2) : number_format(0,2)}}</h2>
@@ -39,7 +167,7 @@
             <div class="spacer-10"></div>
         </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-5 my-1">
         <div class="paymentoptions">
 
             <div class="paymenttitle">

@@ -3,12 +3,28 @@
 @section('title') User Management @endsection
 
 @section('content')
-
-@component('layouts.breadcrumb')
-@slot('title') User Management @endslot
-@slot('li_1') Add New User @endslot
-@endcomponent
 <div class="row" id="holder">
+    <div class="col-md-12">
+        <div class="content-title mt-3">
+            <h3> User Management </h3>
+        </div>
+        <ol class="breadcrumb d-flex justify-content-end breadcrumb-box">
+            <li class="breadcrumb-item">
+                <a href="/alldownloads/" class="breadcrumbs text-danger">
+                    <i class="fa fa-home"></i> Home
+                </a>
+            </li>
+            <li class="breadcrumb-item dropdown" id="breadcrumbDropdown">
+                <a href="#" class="breadcrumbs text-muted dropdown-toggle" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fas fa-plus"></i>Add New User
+                </a>
+            </li>
+        </ol>
+    </div>
+    <!-- end col -->
+</div>
+<div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">

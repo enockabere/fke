@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CustomClasses\NTLM\NTLMSoapClient;
 use Exception;
 use Storage;
+use Carbon\Carbon;
 
 class TrainingsController extends Controller
 {
@@ -18,19 +19,24 @@ class TrainingsController extends Controller
     {
         if(session('member_no') == '' or session('member_no') == null){
             return redirect('/')->with('error', 'Session Expired. Kindly Login again');
-        }else{
-            try{
-                $offeredtrainings = getfilteredNavData('OfferedTrainings', 'Active', 'Yes');
-                //dd($offeredtrainings);
-                $data = $offeredtrainings['value'];
+        } else {
+            try {
+                $currentDate = Carbon::now()->toDateString(); // Get the current date
 
-                return view('/trainings/alltrainings')->with('data', $data);
+                $offeredTrainings = getfilteredNavData('OfferedTrainings', 'Active', 'Yes');
+                $data = $offeredTrainings['value'];
+
+                // Filter out trainings that have already ended
+                $upcomingTrainings = array_filter($data, function($training) use ($currentDate) {
+                    return Carbon::parse($training['End_Date'])->gte($currentDate);
+                });
+
+                return view('/trainings/alltrainings')->with('data', $upcomingTrainings);
             } catch(Exception $e) {
                 return redirect('/dashboard')->with('error', $e->getMessage());
             }
         }
     }
-
     public function viewTraining($no)
     {
         if (session('member_no') == '' or session('member_no') == null) {

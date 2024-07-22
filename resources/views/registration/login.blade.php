@@ -15,6 +15,7 @@
     </script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <title>Federation of Kenya Employers</title>
+    <link rel="shortcut icon" href="{{ URL::asset('images/favicon.png')}}">
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&family=Noto+Sans+Javanese&display=swap');
@@ -455,6 +456,9 @@
 
                                         </div>
                                         <p class="small"> <a href="#" data-bs-toggle="modal"
+                                                data-bs-target="#forgotPassword">Forgot Password?</a>
+                                        </p>
+                                        <p class="small"> <a href="#" data-bs-toggle="modal"
                                                 data-bs-target="#resetPassword">Reset Password?</a>
                                         </p>
                                         <p class="small"> <a href="#" data-bs-toggle="modal"
@@ -476,7 +480,30 @@
         </div>
     </section>
     <!-- Modals -->
-    <!-- Reset Passord -->
+    <!-- Forgot Passord -->
+    <div class="modal fade" id="forgotPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{action('GeneralController@forgotPassword')}}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Member No</label>
+                            <input type="text" name='memberno' class="form-control" placeholder="00-001">
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary button-87 w-100">Send Reset Email <i
+                                    class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="resetPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -488,11 +515,19 @@
                     <form action="{{action('GeneralController@resetPassword')}}" method="POST">
                         {{ csrf_field() }}
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                            <input type="email" name='email' class="form-control" placeholder="name@example.com">
+                            <label for="exampleFormControlInput1" class="form-label">Member No</label>
+                            <input type="text" name='memberno' class="form-control" placeholder="00-001">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Reset Token</label>
+                            <input type="text" name='resetToken' class="form-control" placeholder="123321">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">New Password</label>
+                            <input type="password" name='newPassword' class="form-control" placeholder="*******">
                         </div>
                         <div class="mt-3">
-                            <button type="submit" class="btn btn-primary button-87 w-100">Send Reset Email <i
+                            <button type="submit" class="btn btn-primary button-87 w-100">Reset Password<i
                                     class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         </div>
                     </form>

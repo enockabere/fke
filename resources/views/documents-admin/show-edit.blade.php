@@ -62,26 +62,18 @@
                     <div class="form-group row">
                         <label for="content" class="col-md-2 col-form-label">Content</label>
                         <div class="col-md-10">
-                            <input id="content" type="hidden" name="content" value="" />
-                            <trix-editor input="content" value="78" style="min-height:300px" id="contentTrix">
-                            </trix-editor>
+                            <input id="content" type="hidden" name="content" value="{{ $data['Content'] ?? '' }}" />
+                            <trix-editor input="content" style="min-height:300px" id="contentTrix"></trix-editor>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="externalLinks" class="col-md-2 col-form-label">External Links</label>
                         <div class="col-md-10">
-                            <input id="externalLinks" type="hidden" name="externalLinks" value="" />
+                            <input id="externalLinks" type="hidden" name="externalLinks"
+                                value="{{ $data['ExternalLinks'] ?? '' }}" />
                             <trix-editor input="externalLinks" id="linksTrix" style="min-height:100px"></trix-editor>
                         </div>
                     </div>
-                    <!-- <div class="form-group row">
-                        <label for="templates" class="col-md-2 col-form-label">Templates</label>
-                        <div class="col-md-10">
-                            <input id="templates" type="hidden" name="templates" value="" />
-                            <trix-editor input="templates" style="min-height:100px" id="templatesTrix">
-                            </trix-editor>
-                        </div>
-                    </div> -->
                     <div class="form-group row">
                         <label for="sequence" class="col-md-2 col-form-label">Display Sequence</label>
                         <div class="col-md-10">
@@ -89,14 +81,15 @@
                                 value="{{$data['myAction'] == 'edit'? $data['Sequence']:old('sequence')}}">
                         </div>
                     </div>
-                    <button class=" btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+
             </div>
         </div>
     </div>
     <!-- end col -->
 </div>
 <!-- end row -->
-</form>
 
 @endsection
 

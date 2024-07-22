@@ -550,9 +550,13 @@ class GeneralController extends Controller
     public function resetPassword(REQUEST $request) {
         $email = $request->email;
         $domain = request()->root();
-
+        $service = new NTLMSoapClient(config('app.webService'));
+        if (!isset($params)) {
+            $params = new \stdClass();
+        }
         try {
             Mail::send(new resetMail($email,$domain));
+            $result = $service->FnForgotPortalPassword($params);
             return redirect('/')->with('success', 'Check Eemail for a verification link and token.');
 
         } catch (Exception $e) {

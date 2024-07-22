@@ -42,14 +42,14 @@ class DocumentsAdminController extends Controller
             $data['myAction'] = 'edit';
             $data['categories'] = $categories;
             $blobText = $this->GetDocContent($code);
-            $blobTexts = explode("## ",$blobText);
+            $blobTexts = explode("## ", $blobText);
             $data["Content"] = $blobTexts[0];
             $data["ExternalLinks"] = "";
-            if(count($blobTexts) > 1){
+            if (count($blobTexts) > 1) {
                 $data["ExternalLinks"] = $blobTexts[1];
             }
             $data["Templates"] = "";
-            if(count($blobTexts) > 2){
+            if (count($blobTexts) > 2) {
                 $data["Templates"] = $blobTexts[2];
             }
             return view('documents-admin.show-edit')->with('data', $data);
@@ -57,6 +57,7 @@ class DocumentsAdminController extends Controller
             return redirect('/documents-admin')->with('error', $e->getMessage());
         }
     }
+
 
     public function createUpdate(REQUEST $request)
     {

@@ -77,7 +77,8 @@
                             your business.
                         </p>
                         <div class="banner-action">
-                            <a href="#" class="btn btn-primary button-5">Learn More <i
+                            <a href="https://www.fke-kenya.org/sites/default/files/downloads/FKE%20Training%20Calendar%202024_1.pdf"
+                                class="btn btn-primary button-5" target="blank">Learn More <i
                                     class="fa fa-arrow-circle-right mx-2"></i></a>
                         </div>
                     </div>
@@ -157,7 +158,8 @@
                             <p><a href="/Rescheduledappointments" class="small-ident"><i
                                         class="las la-hand-point-right"></i> Rescheduled
                                     Appointment </a></p>
-                            <p><a href="/allappointment" class="small-ident"><i class="las la-hand-point-right"></i> All
+                            <p><a href="/allappointments" class="small-ident"><i class="las la-hand-point-right"></i>
+                                    All
                                     Appointments
                                 </a>
                             </p>
@@ -188,13 +190,13 @@
                         </div>
                         <hr style="margin-top: -10px;border-top: 1px dotted red;">
                     </div>
-                    <div class="memberservices my-2">
+                    <!-- <div class="memberservices my-2">
                         <p><a href="/cases" class="solo-menu"> Case
                                 Management
                             </a>
                         </p>
                         <hr style="margin-top: -10px;border-top: 1px dotted red;">
-                    </div>
+                    </div> -->
                     <div class="memberservices my-2 drops5">
                         <h4>Financials</h4>
                         <div class='menu-drops menu5'>
@@ -212,6 +214,27 @@
                             </p>
 
                         </div>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                    </div>
+                    <div class="memberservices my-2 drops6">
+                        <h4>User
+                            Management</h4>
+                        <div class='menu-drops menu6'>
+                            <p><a href="/users" class="small-ident"><i class="las la-hand-point-right"></i>
+                                    Users</a>
+                            </p>
+                            @if ($user['membertype'] == 'ASSOCIATION')
+                            <p><a href="/associatedcompanies" class="small-ident"><i
+                                        class="las la-hand-point-right"></i>
+                                    Associated Companies </a>
+                            </p>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="memberservices my-2">
+                        <p><a href="/users" class="solo-menu">
+                            </a>
+                        </p>
                         <hr style="margin-top: -10px;border-top: 1px dotted red;">
                     </div>
                     @if(session('isDocumentsAdmin') != null && session('isDocumentsAdmin') == true)
@@ -239,114 +262,128 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 my-1">
-                <div class="contentCard">
-                    <h5>Industrial & Labour Relations at workplace </h5>
-                    <hr>
-                </div>
-                @foreach ($IndustrialLabour as $IndustrialLabour)
-                <a href="/singleDownload/{{$IndustrialLabour['Code']}}/{{$IndustrialLabour['Category']}}/">
-                    <div class="contentData">
-                        <p>{{$IndustrialLabour['Title']}}</p>
-                        <i class="fa fa-arrow-right"></i>
+            <div class="col-md-9 my-1">
+                <div class="row">
+                    <div class="col-md-4 my-1">
+                        <div class="contentCard">
+                            <h5>Industrial & Labour Relations at workplace </h5>
+                            <hr>
+                        </div>
+                        @foreach ($IndustrialLabour as $IndustrialLabour)
+                        <a href="/singleDownload/{{$IndustrialLabour['Code']}}/{{$IndustrialLabour['Category']}}/">
+                            <div class="contentData">
+                                <p>{{$IndustrialLabour['Title']}}</p>
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                        @endforeach
                     </div>
-                </a>
-                <hr style="margin-top: -10px;border-top: 1px dotted red;">
-                @endforeach
-            </div>
-            <div class="col-md-3 my-1">
-                <div class="contentCard">
-                    <h5>Discipline & Separation</h5>
-                    <hr>
-                </div>
-                @foreach ($DisciplineSeparation as $DisciplineSeparation)
-                <a href="/singleDownload/{{$DisciplineSeparation['Code']}}/{{$DisciplineSeparation['Category']}}/">
-                    <div class="contentData">
-                        <p>{{$DisciplineSeparation['Title']}}</p>
-                        <i class="fa fa-arrow-right"></i>
+                    <div class="col-md-4 my-1">
+                        <div class="contentCard">
+                            <h5>Discipline & Separation</h5>
+                            <hr>
+                        </div>
+                        @foreach ($DisciplineSeparation as $DisciplineSeparation)
+                        <a
+                            href="/singleDownload/{{$DisciplineSeparation['Code']}}/{{$DisciplineSeparation['Category']}}/">
+                            <div class="contentData">
+                                <p>{{$DisciplineSeparation['Title']}}</p>
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                        @endforeach
                     </div>
-                </a>
-                <hr style="margin-top: -10px;border-top: 1px dotted red;">
-                @endforeach
-            </div>
-            <div class="col-md-3 my-1">
-                <div class="contentCard">
-                    <h5>Labour Laws</h5>
-                    <hr>
-                </div>
-                @foreach ($labourLaws as $labourLaws)
-                <a href="/singleDownload/{{$labourLaws['Code']}}/{{$labourLaws['Category']}}/">
-                    <div class="contentData">
-                        <p>{{$labourLaws['Title']}}</p>
-                        <i class="fa fa-arrow-right"></i>
+                    <div class="col-md-4 my-1">
+                        <div class="contentCard">
+                            <h5>Labour Laws</h5>
+                            <hr>
+                        </div>
+                        @foreach ($labourLaws as $labourLaws)
+                        <a href="/singleDownload/{{$labourLaws['Code']}}/{{$labourLaws['Category']}}/">
+                            <div class="contentData">
+                                <p>{{$labourLaws['Title']}}</p>
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                        @endforeach
                     </div>
-                </a>
-                <hr style="margin-top: -10px;border-top: 1px dotted red;">
-                @endforeach
+                </div>
+                <div class="row">
+                    @if (count($EmploymentRelation) > 0)
+                    <div class="col-md-4 my-1">
+                        <div class="contentCard">
+                            <h5>Employment Relation </h5>
+                            <hr>
+                        </div>
+                        @foreach ($EmploymentRelation as $EmploymentRelation)
+                        <a href="/singleDownload/{{$EmploymentRelation['Code']}}/{{$EmploymentRelation['Category']}}/">
+                            <div class="contentData">
+                                <p>{{$EmploymentRelation['Title']}}</p>
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                        @endforeach
+                    </div>
+                    @endif
+                    @if (count($BusinessPractices) > 0)
+                    <div class="col-md-4 my-1">
+                        <div class="contentCard">
+                            <h5>Business Practices</h5>
+                            <hr>
+                        </div>
+                        @foreach ($BusinessPractices as $BusinessPractices)
+                        <a href="/singleDownload/{{$BusinessPractices['Code']}}/{{$BusinessPractices['Category']}}/">
+                            <div class="contentData">
+                                <p>{{$BusinessPractices['Title']}}</p>
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                        @endforeach
+                    </div>
+                    @endif
+                    @if (count($WorkingEnvironment) > 0)
+                    <div class="col-md-4 my-1">
+                        <div class="contentCard">
+                            <h5>Working Environment & OSH</h5>
+                            <hr>
+                        </div>
+                        @foreach ($WorkingEnvironment as $WorkingEnvironment)
+                        <a href="/singleDownload/{{$WorkingEnvironment['Code']}}/{{$WorkingEnvironment['Title']}}/">
+                            <div class="contentData">
+                                <p>{{$WorkingEnvironment['Title']}}</p>
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                        @endforeach
+                    </div>
+                    @endif
+                    @if (count($FAQs) > 0)
+                    <div class="col-md-4 my-1">
+                        <div class="contentCard">
+                            <h5>FAQs</h5>
+                            <hr>
+                        </div>
+                        @foreach ($FAQs as $FAQs)
+                        <a href="/singleDownload/{{$FAQs['Code']}}/{{$FAQs['Title']}}/">
+                            <div class="contentData">
+                                <p>{{$FAQs['Title']}}</p>
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <hr style="margin-top: -10px;border-top: 1px dotted red;">
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 my-1">
-                <div class="contentCard">
-                    <h5>Employment Relation </h5>
-                    <hr>
-                </div>
-                @foreach ($EmploymentRelation as $EmploymentRelation)
-                <a href="/singleDownload/{{$EmploymentRelation['Code']}}/{{$EmploymentRelation['Category']}}/">
-                    <div class="contentData">
-                        <p>{{$EmploymentRelation['Title']}}</p>
-                        <i class="fa fa-arrow-right"></i>
-                    </div>
-                </a>
-                <hr style="margin-top: -10px;border-top: 1px dotted red;">
-                @endforeach
-            </div>
-            <div class="col-md-3 my-1">
-                <div class="contentCard">
-                    <h5>Business Practices</h5>
-                    <hr>
-                </div>
-                @foreach ($BusinessPractices as $BusinessPractices)
-                <a href="/singleDownload/{{$BusinessPractices['Code']}}/{{$BusinessPractices['Category']}}/">
-                    <div class="contentData">
-                        <p>{{$BusinessPractices['Title']}}</p>
-                        <i class="fa fa-arrow-right"></i>
-                    </div>
-                </a>
-                <hr style="margin-top: -10px;border-top: 1px dotted red;">
-                @endforeach
-            </div>
-            <div class="col-md-3 my-1">
-                <div class="contentCard">
-                    <h5>Working Environment & OSH</h5>
-                    <hr>
-                </div>
-                @foreach ($WorkingEnvironment as $WorkingEnvironment)
-                <a href="/singleDownload/{{$WorkingEnvironment['Code']}}/{{$WorkingEnvironment['Title']}}/">
-                    <div class="contentData">
-                        <p>{{$WorkingEnvironment['Title']}}</p>
-                        <i class="fa fa-arrow-right"></i>
-                    </div>
-                </a>
-                <hr style="margin-top: -10px;border-top: 1px dotted red;">
-                @endforeach
-            </div>
-            <div class="col-md-3 my-1">
-                <div class="contentCard">
-                    <h5>FAQs</h5>
-                    <hr>
-                </div>
-                @foreach ($FAQs as $FAQs)
-                <a href="/singleDownload/{{$FAQs['Code']}}/{{$FAQs['Title']}}/">
-                    <div class="contentData">
-                        <p>{{$FAQs['Title']}}</p>
-                        <i class="fa fa-arrow-right"></i>
-                    </div>
-                </a>
-                <hr style="margin-top: -10px;border-top: 1px dotted red;">
-                @endforeach
-            </div>
-        </div>
+
     </div>
 </section>
 

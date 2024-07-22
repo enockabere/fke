@@ -37,16 +37,12 @@ mark {
         <div class="row my-5" id="highlight">
             @forelse ($data as $data)
             <div class="">
-                <a href="/singleDownload/{{$data['Document_Category']}}/{{$data['Document_Type']}}/">
+                <a href="/singleDownload/{{$data['Code']}}/{{$data['Category']}}/">
                     <div class="contentData">
-                        <p>{{$data['Name']}}</p>
+                        <p>{{$data['Title']}} {{$data['Code']}}</p>
                         <div>
-                            <p class="text-dark">
-                                {{$data['Body']}}
-                            </p>
                             </br>
-                            <a href="/singleDownload/{{$data['Document_Category']}}/{{$data['Document_Type']}}/"
-                                class="text-danger">View
+                            <a href="/singleDownload/{{$data['Code']}}/{{$data['Category']}}/" class="text-danger">View
                                 Result
                                 <span><i class="fa fa-arrow-right text-success"></i></span> <span>
                             </a>

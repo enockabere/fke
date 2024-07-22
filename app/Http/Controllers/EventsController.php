@@ -8,6 +8,7 @@ use Exception;
 use App\Models\Events\EventRegistration;
 use App\Imports\ExcelImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class EventsController extends Controller
 {
@@ -21,11 +22,21 @@ class EventsController extends Controller
         if (session('member_no') == '' or session('member_no') == null) {
             return redirect('/')->with('error', 'Session Expired. Kindly Login again');
         } else {
-            $upcomingevents = getNavData('UpcomingEvents');
-            //$upcomingevents = getfilteredNavData('UpcomingEvents','Archived',false);
+            try {
+                $currentDate = Carbon::now()->toDateString(); // Get the current date
 
-            $data = $upcomingevents['value'];
-            return view('/events/upcomingevents')->with('data', $data);
+                $upcomingEvents = getNavData('UpcomingEvents');
+                $data = $upcomingEvents['value'];
+
+                // Filter out events that have already ended
+                $upcomingEvents = array_filter($data, function($event) use ($currentDate) {
+                    return Carbon::parse($event['Event_End_Date'])->gte($currentDate);
+                });
+
+                return view('/events/upcomingevents')->with('data', $upcomingEvents);
+            } catch(Exception $e) {
+                return redirect('/dashboard')->with('error', $e->getMessage());
+            }
         }
     }
 
