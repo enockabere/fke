@@ -489,17 +489,42 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{action('GeneralController@forgotPassword')}}" method="POST">
-                        {{ csrf_field() }}
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Member No</label>
-                            <input type="text" name='memberno' class="form-control" placeholder="00-001">
-                        </div>
-                        <div class="mt-3">
-                            <button type="submit" class="btn btn-primary button-87 w-100">Send Reset Email <i
-                                    class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                        </div>
-                    </form>
+                    <div class="container mt-5">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="members-tab" data-toggle="tab" href="#members" role="tab" aria-controls="members" aria-selected="true">Members</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">Users</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="members" role="tabpanel" aria-labelledby="members-tab">
+                <form action="{{ action('GeneralController@forgotPassword') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Member No</label>
+                        <input type="text" name="memberno" class="form-control" placeholder="00-001">
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary button-87 w-100">Send Reset Email <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+                <form action="{{ action('GeneralController@forgotPassword') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Member No</label>
+                        <input type="text" name="memberno" class="form-control" placeholder="00-001">
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary button-87 w-100">Send Reset Email <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
                 </div>
             </div>
         </div>
