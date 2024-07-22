@@ -556,30 +556,47 @@ class GeneralController extends Controller
     public function forgotPassword(REQUEST $request) {
         $memberno = $request->memberno;
         $domain = request()->root();
-        $memebers_endpoint = "customers";
+        $members_endpoint = "customers";
         $contacts_endpoint = "MyContacts";
-
+    
         try {
-            $get_memeber = getfilteredNavData($memebers_endpoint, 'No', $memberno)['value'][0];
+            // Check if member number exists in the customers endpoint
+            $get_member = getfilteredNavData($members_endpoint, 'No', $memberno);
+    
+            if (empty($get_member['value'])) {
+                // If not found in customers, check the MyContacts endpoint
+                $get_contact = getfilteredNavData($contacts_endpoint, 'No', $memberno);
+                
+                if (empty($get_contact['value'])) {
+                    return redirect('/')->with('error', 'Member not found.');
+                }
+                
+                // Member found in MyContacts, use FnForgotPortalPasswordContact service
+                $service_name = 'FnForgotPortalPasswordContact';
+            } else {
+                // Member found in customers, use FnForgotPortalPassword service
+                $service_name = 'FnForgotPortalPassword';
+            }
+    
             $service = new NTLMSoapClient(config('app.webService'));
             if (!isset($params)) {
                 $params = new \stdClass();
             }
             $params->customerNo = $memberno;
-            $result = $service->FnForgotPortalPassword($params);
-            // var_dump( $memberno).exit;
+            $result = $service->$service_name($params);
+    
             if ($result->return_value) {
                 $request->session()->forget('reset_email');
-                return redirect('/')->with('success', 'A token that you will use to reset your password has been  successfully sent to your email. use it to reset your password.');
+                return redirect('/')->with('success', 'A token that you will use to reset your password has been successfully sent to your email. Use it to reset your password.');
             }
-            // Mail::send(new resetMail($memberno,$domain));
-            return redirect('/')->with('success', 'Check Eemail for a verification link and token.');
-
+    
+            return redirect('/')->with('success', 'Check your email for a verification link and token.');
+    
         } catch (Exception $e) {
-            return redirect("/")->with('error', $e->getMessage());
+            return redirect('/')->with('error', $e->getMessage());
         }
-         
     }
+
     public function resetPassword(REQUEST $request) {
         $memberno = $request->memberno;
         $resetToken = $request->resetToken;
